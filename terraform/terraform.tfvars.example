@@ -1,0 +1,26 @@
+# Example variable values for Terraform. Copy to terraform.tfvars and fill in your own values.
+# No secrets or sensitive data should be included here.
+
+# Environment configuration
+environment = "dev"
+project     = "aws-infrastructure"
+owner       = "terraform"
+region      = "eu-central-1"
+
+# VPC configuration
+vpc_cidr = "10.0.0.0/16"
+azs      = ["eu-central-1a", "eu-central-1b"]
+private_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+public_subnet_cidrs  = ["10.0.101.0/24", "10.0.102.0/24"]
+
+# Database configuration
+# db_username and db_password should be set via environment variables or command line
+db_name = "appdb"
+
+# Docker images (replace with your actual images)
+backend_image  = "nginx:alpine"
+frontend_image = "nginx:alpine"
+
+# Monitoring configuration
+enable_cloudwatch_alarms = true
+enable_secrets_rotation  = false 

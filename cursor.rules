@@ -1,0 +1,54 @@
+# Cursor Rules for Project Development
+
+1. **Language Policy**
+   - All code, documentation, comments, commit messages, and configuration files must be written in English. No other language is allowed anywhere in the project.
+
+2. **Service Documentation**
+   - For every AWS service or major component used, a dedicated README.md file must be created in the relevant directory.
+   - Each README must include:
+     - What the service/component is
+     - Why it is used in this project
+     - What problems it solves
+     - What alternative options exist and why this one was chosen
+     - Any best practices or caveats
+
+3. **Workflow and Project Progression**
+   - Before starting implementation, a clear workflow and project plan must be defined and documented.
+   - Each major step (infrastructure, backend, frontend, CI/CD, etc.) should be tracked and documented.
+
+4. **Secrets Management**
+   - All sensitive data must be stored in AWS Secrets Manager. No secrets are to be hardcoded or stored in plaintext in the repository.
+
+5. **CI/CD**
+   - GitHub Actions will be used for all automation, including build, test, and deployment.
+
+6. **Code Reviews and Contributions**
+   - All contributions must be reviewed and approved before merging.
+   - Documentation must be updated with every relevant code or infrastructure change.
+
+7. **Best Practices**
+   - Follow AWS and Terraform best practices for security, cost, and maintainability.
+   - Use the principle of least privilege for IAM roles and policies.
+
+8. **Open Source Readiness**
+   - All documentation and code must be clear, concise, and ready for open source contribution.
+   - Provide examples and usage instructions wherever possible.
+
+9. **Terraform Environment Variable Management**
+   - All environment variables for Terraform must be managed using a `.env` file for local development.
+   - The `.env` file is loaded into the shell before running Terraform commands (e.g., `export $(grep -v '^#' .env | xargs)`).
+   - Terraform reads variables from the shell if they are prefixed with `TF_VAR_` (e.g., `TF_VAR_db_username`).
+   - The `.env` file is not read by Terraform directly.
+   - For CI/CD, environment variables must be set in the pipeline configuration or secret manager.
+   - A `.env.example` file must be provided and no sensitive values should be committed.
+
+10. **Service Module Creation Policy**
+    - For each infrastructure service (e.g., RDS, VPC, ECS), create a dedicated module folder (e.g., modules/rds/) only when that service is being implemented.
+    - Each module must include its own Terraform files (`main.tf`, `variables.tf`, `outputs.tf`) and a `README.md`.
+    - Complete and document each service before moving to the next.
+    - Do not create all service folders at once; add them as needed.
+
+11. **Codebase Analysis and Context Clarification**
+    - Before starting any implementation or making changes, always analyze the current codebase and project context.
+    - Ask clarifying questions and resolve any uncertainties about the codebase, requirements, or project context before proceeding with any work.
+    - This analysis and clarification step is mandatory before every new task or contribution. 
